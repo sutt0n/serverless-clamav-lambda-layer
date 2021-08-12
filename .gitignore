@@ -5,3 +5,4 @@ layer/bin
 layer/etc
 layer/var
 coverage/
+.DS_Store
