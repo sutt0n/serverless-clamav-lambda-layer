@@ -1,0 +1,15 @@
+{
+  "name": "aws-ffmpeg-layer",
+  "description": "",
+  "version": "0.1.0",
+  "dependencies": {},
+  "devDependencies": {
+    "aws-sdk": "^2.964.0",
+    "jest": "^27.0.6"
+  },
+  "scripts": {
+    "build": "./build.sh",
+    "deploy": "sls deploy",
+    "test": "jest handler.test.js"
+  }
+}
