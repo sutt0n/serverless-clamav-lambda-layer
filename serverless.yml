@@ -3,6 +3,10 @@ service: clambda-av
 provider:
   name: aws
   runtime: nodejs14.x
+  ecr:
+    images:
+      clambdaAv:
+        path: ./
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -12,21 +16,16 @@ provider:
 
 functions:
   virusScan:
-    handler: handler.virusScan
+    image:
+      name: clambdaAv
     memorySize: 2048
     events:
       - s3: 
           bucket: clambda-av-files
           event: s3:ObjectCreated:*
-    layers:
-      - {Ref: ClamavLambdaLayer}
     timeout: 120
 
 package:
   exclude:
     - node_modules/**
     - coverage/**
-
-layers:
-  clamav:
-    path: layer

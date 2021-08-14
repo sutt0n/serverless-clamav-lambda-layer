@@ -29,7 +29,7 @@ module.exports.virusScan = async (event, context) => {
     
     try { 
       // scan it
-      const scanStatus = execSync(`clamscan --database=/opt/var/lib/clamav /tmp/${record.s3.object.key}`);
+      execSync(`./bin/clamscan --database=./var/lib/clamav /tmp/${record.s3.object.key}`);
 
       await s3
         .putObjectTagging({

@@ -1,4 +1,4 @@
-FROM amazonlinux:2
+FROM amazonlinux:2 AS layer-image
 
 WORKDIR /home/build
 
@@ -68,7 +68,10 @@ RUN useradd -g clamav -s /bin/false -c "Clam Antivirus" clamupdate
 
 RUN LD_LIBRARY_PATH=./lib ./bin/freshclam --config-file=bin/freshclam.conf
 
-RUN zip -r9 clamav_lambda_layer.zip bin
-RUN zip -r9 clamav_lambda_layer.zip lib
-RUN zip -r9 clamav_lambda_layer.zip var
-RUN zip -r9 clamav_lambda_layer.zip etc
+FROM public.ecr.aws/lambda/nodejs:14
+
+COPY --from=layer-image /home/build ./
+
+COPY handler.js ./
+
+CMD ["handler.virusScan"]
