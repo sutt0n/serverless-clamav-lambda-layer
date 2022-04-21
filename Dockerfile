@@ -66,6 +66,9 @@ RUN groupadd clamav
 RUN useradd -g clamav -s /bin/false -c "Clam Antivirus" clamav
 RUN useradd -g clamav -s /bin/false -c "Clam Antivirus" clamupdate
 
+RUN mkdir -p opt/var/lib/clamav
+RUN chmod -R 777 opt/var/lib/clamav
+
 RUN LD_LIBRARY_PATH=./lib ./bin/freshclam --config-file=bin/freshclam.conf
 
 RUN zip -r9 clamav_lambda_layer.zip bin
