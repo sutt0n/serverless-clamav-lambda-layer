@@ -1,23 +1,32 @@
 service: clambda-av
 
+custom:
+  source_bucket: 'clambda-av-files'
+
 provider:
   name: aws
   runtime: nodejs14.x
+  region: us-east-1
   ecr:
     images:
-      clambdaAv:
+      clambda-av:
         path: ./
   iamRoleStatements:
-    - Effect: Allow
+    - Effect: 'Allow'
       Action:
-        - s3:GetObject
-        - s3:PutObjectTagging
-      Resource: "arn:aws:s3:::clambda-av-files/*"
+        - 's3:PutObject'
+        - 's3:PutObjectTagging'
+        - 's3:GetObject'
+      Resource: "arn:aws:s3:::*/*"
+    - Effect: 'Allow'
+      Action:
+        - 's3:ListBucket'
+      Resource: "arn:aws:s3:::*"
 
 functions:
   virusScan:
     image:
-      name: clambdaAv
+      name: clambda-av
     memorySize: 2048
     events:
       - s3: 
