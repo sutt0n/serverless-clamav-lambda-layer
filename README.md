@@ -6,7 +6,7 @@
 2. Run `npm install`
 3. Build the clamav lamber layer `bash ./build`
 
-## code formatting
+## Code formatting
 
 To format your code and make it easier to read:
 
