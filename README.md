@@ -6,11 +6,17 @@
 2. Run `npm install`
 3. Build the clamav lamber layer `bash ./build`
 
+## code formatting
+
+To format your code and make it easier to read:
+
+- run `npm format`
+
 ## Deploying
 
 Deployment can be done through your CI/CD process, or via command line:
 
-run `sls deploy --aws-profile <your_aws_profile>`
+- run `sls deploy --aws-profile <your_aws_profile>`
 
 ## Unit Tests
 

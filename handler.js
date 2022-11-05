@@ -20,16 +20,18 @@ module.exports.virusScan = async (event, context) => {
     const s3Object = await s3
       .getObject({
         Bucket: record.s3.bucket.name,
-        Key: record.s3.object.key
+        Key: record.s3.object.key,
       })
       .promise();
 
     // write file to disk
     writeFileSync(`/tmp/${record.s3.object.key}`, s3Object.Body);
-    
-    try { 
+
+    try {
       // scan it
-      const scanStatus = execSync(`clamscan --database=/opt/var/lib/clamav /tmp/${record.s3.object.key}`);
+      const scanStatus = execSync(
+        `clamscan --database=/opt/var/lib/clamav /tmp/${record.s3.object.key}`
+      );
 
       await s3
         .putObjectTagging({
@@ -38,14 +40,14 @@ module.exports.virusScan = async (event, context) => {
           Tagging: {
             TagSet: [
               {
-                Key: 'av-status',
-                Value: 'clean'
-              }
-            ]
-          }
+                Key: "av-status",
+                Value: "clean",
+              },
+            ],
+          },
         })
         .promise();
-    } catch(err) {
+    } catch (err) {
       if (err.status === 1) {
         // tag as dirty, OR you can delete it
         await s3
@@ -55,11 +57,11 @@ module.exports.virusScan = async (event, context) => {
             Tagging: {
               TagSet: [
                 {
-                  Key: 'av-status',
-                  Value: 'dirty'
-                }
-              ]
-            }
+                  Key: "av-status",
+                  Value: "dirty",
+                },
+              ],
+            },
           })
           .promise();
       }

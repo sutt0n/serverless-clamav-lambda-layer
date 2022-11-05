@@ -15,6 +15,7 @@
     "build": "./build.sh",
     "deploy": "sls deploy",
     "test": "jest handler.test.js",
-    "format": "npm run prettier"
+    "format": "npm run prettier",
+    "prettier": "npx prettier --write ./*.js"
   }
 }
