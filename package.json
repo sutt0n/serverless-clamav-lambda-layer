@@ -2,10 +2,13 @@
   "name": "aws-ffmpeg-layer",
   "description": "",
   "version": "0.1.0",
-  "dependencies": {},
+  "dependencies": {
+    "serverless": "^3.24.1"
+  },
   "devDependencies": {
     "aws-sdk": "^2.964.0",
-    "jest": "^27.0.6"
+    "jest": "^27.0.6",
+    "npm-check": "^6.0.1"
   },
   "scripts": {
     "build": "./build.sh",
