@@ -6,11 +6,19 @@
 2. Run `npm install`
 3. Build the clamav lamber layer `bash ./build`
 
-## Code formatting
+## Maintenance
+
+### Code formatting
 
 To format your code and make it easier to read:
 
 - run `npm format`
+
+### Dependency checking
+
+To ensure you have the latest versions of dependencies and check for unused dependencies:
+
+- run `npm-check`
 
 ## Deploying
 
