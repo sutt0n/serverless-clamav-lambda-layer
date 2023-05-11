@@ -2,14 +2,20 @@
   "name": "aws-ffmpeg-layer",
   "description": "",
   "version": "0.1.0",
-  "dependencies": {},
+  "dependencies": {
+    "serverless": "^3.25.0"
+  },
   "devDependencies": {
     "aws-sdk": "^2.964.0",
-    "jest": "^27.0.6"
+    "jest": "^29.2.2",
+    "npm-check": "^6.0.1",
+    "prettier": "^2.4.1"
   },
   "scripts": {
     "build": "./build.sh",
     "deploy": "sls deploy",
-    "test": "jest handler.test.js"
+    "test": "jest handler.test.js",
+    "format": "npm run prettier",
+    "prettier": "npx prettier --write ./*.js"
   }
 }
